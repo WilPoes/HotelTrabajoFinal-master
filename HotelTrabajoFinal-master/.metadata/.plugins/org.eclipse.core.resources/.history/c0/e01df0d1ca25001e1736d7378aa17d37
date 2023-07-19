@@ -1,0 +1,80 @@
+package pe.edu.universidad.gestorreaservas;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import pe.edu.universidad.dto.DtoReserva;
+import pe.edu.universidad.entidades.Habitacione;
+import pe.edu.universidad.entidades.Reserva;
+import pe.edu.universidad.entidades.ServiciosAdicionale;
+
+
+
+
+@Path("ServicioGestorReservas")
+@Stateless
+@LocalBean
+public class ServicioGestorReservas {
+	@PersistenceContext(unitName = "hotel_jpa")
+	private EntityManager em;
+	
+	@GET
+	@Path("listarReservas")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Reserva> listarReservas() {
+	    TypedQuery<Reserva> query = em.createQuery("SELECT r FROM Reserva r ", Reserva.class);
+	    return query.getResultList();
+	}
+	@GET
+	@Path("listarReservasDto")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<DtoReserva> listarReservasDto() {
+		List<DtoReserva>dtoReservas = new ArrayList<DtoReserva>();
+	    TypedQuery<Reserva> query = em.createQuery("SELECT r FROM Reserva r ", Reserva.class);
+	    List<Reserva> listaReserva = query.getResultList();
+	    for (Reserva reserva : listaReserva) {
+			DtoReserva dtoreserva = new DtoReserva();
+			dtoreserva.setId_reserva(reserva.getReservaId());
+			dtoreserva.setNombre(reserva.getNombreCliente());
+			dtoreserva.setFecha_inicio(reserva.getFechaInicio());
+			dtoreserva.setFecha_salida(reserva.getFechaFin());
+			dtoReservas.add(dtoreserva);		}
+	    return dtoReservas ;
+	}
+	
+	
+	@GET
+	@Path("listarHabitaciones")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Habitacione> listarHabitaciones() {
+        TypedQuery<Habitacione> query = em.createQuery("SELECT h FROM Habitacione h", Habitacione.class);
+        return query.getResultList();
+    }
+	
+	public List<ServiciosAdicionale> listarServicios(){
+		TypedQuery<ServiciosAdicionale> query = em.createQuery("SELECT s FROM ServiciosAdicionale s",ServiciosAdicionale.class);
+		return query.getResultList();
+	}
+	
+	public void guardarReserva(Reserva reserva) {
+		em.persist(reserva);	
+	}
+	public Habitacione buscarHabitacionPorId(int id) {
+        return em.find(Habitacione.class, id);
+    }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title><h:outputText value="#{msg.index_titulo}"></h:outputText></title>
+</h:head>
+
+<h:body>
+	<ui:include src="../Commun/Navbar.xhtml">
+	</ui:include>
+
+	<b:container fluid="true">
+		<b:row>
+			<h2 class="sub-header">Pedidos por Reserva del Cliente</h2>
+			<p>Aqui mostramos los servicios que se pidieron par ala reserva
+				#{beanCheckOut.idReserva}</p>
+		</b:row>
+		<b:row>
+			<b:column medium-screen="4">
+				<h:form>
+					<b:dataTable value="#{beanCheckOut.servicioPorReserva}" var="serv">
+						<b:dataTableColumn value="#{serv.id_servicio}" />
+						<b:dataTableColumn value="#{serv.precio}" />
+						<b:dataTableColumn value="#{serv.nombre}" />
+						<b:dataTableColumn value="#{serv.precio}" />
+					</b:dataTable>
+				</h:form>
+			</b:column>
+
+			<b:column medium-screen="5">
+				<p>Aqui se muestra el total y la descripcion de la reserva</p>
+			</b:column>
+
+			<b:column medium-screen="1">
+				<h:panelGrid columns="2">
+					<h:form>
+						<h:commandButton value="CheckOut" look="danger"
+							action="#{beanCheckOut.modificarRegistro}">
+							<f:param name="idReserva" value="#{beanCheckOut.idReserva}">
+							</f:param>
+						</h:commandButton>
+					</h:form>
+				</h:panelGrid>
+			</b:column>
+		</b:row>
+	</b:container>
+</h:body>
+</html>

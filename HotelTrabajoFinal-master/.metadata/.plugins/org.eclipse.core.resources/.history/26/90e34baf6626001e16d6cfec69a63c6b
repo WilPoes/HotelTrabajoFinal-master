@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title><h:outputText value="#{msg.index_titulo}"></h:outputText></title>
+</h:head>
+
+<h:body>
+	<ui:include src="Commun/Navbar.xhtml"></ui:include>
+	<div class="container">
+		<div class=" ">
+			<div class="row">
+				<b:column span="6">
+
+					<h1>Datos de Reserva</h1>
+					<h:form>
+						<b:accordion expanded-panels="#{beanReserva.activeIndexFD}">
+							<b:panel title="Informacion Personal" id="panel1">
+								<b:row>
+									<b:column span="6">
+										<b:inputText label="Nombre completo"
+											value="#{beanReserva.reservaDTO.nombreCliente}" />
+									</b:column>
+								</b:row>
+								<b:row>
+									<b:column span="6">
+										<b:inputText label="Correo electrónico" id="correo"
+											value="#{beanReserva.reservaDTO.correoElectronico}"
+											required="true" />
+									</b:column>
+									<b:column span="6">
+										<b:inputText label="Teléfono" id="telefono"
+											value="#{beanReserva.reservaDTO.telefono}" required="true" />
+									</b:column>
+								</b:row>
+								<b:row>
+									<b:column span="6">
+										<b:dateTimePicker label="Fecha de inicio" format="MM/DD/YYYY"
+											value="#{beanReserva.reservaDTO.fechaInicio}" required="true" />
+									</b:column>
+									<b:column span="6">
+										<b:dateTimePicker label="Fecha de fin" format="MM/DD/YYYY"
+											value="#{beanReserva.reservaDTO.fechaFin}" required="true" />
+									</b:column>
+								</b:row>
+								<b:row>
+									<b:column span="6">
+										<b:inputText label="Número de adultos"
+											value="#{beanReserva.reservaDTO.numeroAdultos}"
+											required="true" />
+									</b:column>
+									<b:column span="6">
+										<b:inputText label="Número de niños"
+											value="#{beanReserva.reservaDTO.numeroNinos}" required="true" />
+									</b:column>
+								</b:row>
+
+								<b:row>
+									<b:column span="6">
+										<b:commandButton value="Guardar cambios" class=""
+											actionListener="#{beanReserva.guardarReserva}" />
+									</b:column>
+								</b:row>
+							</b:panel>
+							<b:panel title="Servicios" id="panel2">
+								<h1>Servicios</h1>
+								<h:form>
+									<b:dataTable value="#{beanCarrito.carrito}" var="carrito">
+										<f:facet name="header">
+											<tr>
+												<th colspan="1">Codigo</th>
+												<th colspan="1">Descripcion</th>
+												<th colspan="1">Nombre</th>
+												<th colspan="1">Precio</th>
+												<th colspan="1">Acciones</th>
+											</tr>
+										</f:facet>
+										<b:dataTableColumn value="#{carrito.servicioAdicionalId}" />
+										<b:dataTableColumn value="#{carrito.descripcion}" />
+										<b:dataTableColumn value="#{carrito.nombre}" />
+										<b:dataTableColumn value="#{carrito.precio}" />
+
+										<h:column>
+											<!-- HEADER -->
+											<f:facet name="header">
+												<h:outputText value="Accion"></h:outputText>
+											</f:facet>
+
+											<!-- PARAMETROS -->
+											<f:param value="botones">
+												<b:button value="Añadir" look="primary" />
+											</f:param>
+
+										</h:column>
+									</b:dataTable>
+								</h:form>
+							</b:panel>
+						</b:accordion>
+					</h:form>
+				</b:column>
+				<b:column span="6">
+
+					<h1>Habitacion</h1>
+					<div class="thumbnail">
+						<img src="img/#{beanReserva.habitacionSeleccionada.imagenUrl}"
+							class="card-img-top"
+							alt="#{beanReserva.habitacionSeleccionada.imagenUrl}"></img>
+						<div class="card-body">
+							<h5 class="card-title">
+								<strong>Tipo de Habitacion</strong> :
+								#{beanReserva.habitacionSeleccionada.tipo}
+							</h5>
+							<p class="card-text">#{beanReserva.habitacionSeleccionada.descripcion}</p>
+							<p class="card-text">
+								<strong>Precio</strong>:
+								#{beanReserva.habitacionSeleccionada.precio}
+							</p>
+						</div>
+					</div>
+					<h1>Informacion Pago</h1>
+					<p>
+						<strong>Monto Total: </strong>S/.
+					</p>
+				</b:column>
+			</div>
+
+			<div class="row">
+				<b:column span="6">
+
+				</b:column>
+
+			</div>
+		</div>
+
+	</div>
+	<!-- /container -->
+
+</h:body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title><h:outputText value="#{msg.index_titulo}"></h:outputText></title>
+</h:head>
+
+<h:body>
+
+	<h1>Reserva</h1>
+	<h:form>
+		<b:dataTable value="#{beanReserva.reservas}" var="reserva">
+			<b:dataTableColumn value="#{reserva.reservaId}" />
+			<b:dataTableColumn value="#{reserva.habitacione.habitacionId}" />
+			<b:dataTableColumn value="#{reserva.nombreCliente}" />
+			<b:dataTableColumn value="#{reserva.correoElectronico}" />
+			<b:dataTableColumn value="#{reserva.telefono}" />
+			<b:dataTableColumn value="#{reserva.fechaInicio}" />
+			<b:dataTableColumn value="#{reserva.fechaFin}" />
+
+			<h:column>
+				<!-- HEADER -->
+				<f:facet name="header">
+					<h:outputText value="Accion"></h:outputText>
+				</f:facet>
+
+				<!-- PARAMETROS -->
+				<f:param value="botones">
+					<b:button value="Normal button" look="primary" />
+					<b:button value="Normal button" />
+				</f:param>
+
+			</h:column>
+		</b:dataTable>
+	</h:form>
+	<div class="container">
+		<div class="col-md-11">
+			<div class="row">
+
+				<ui:repeat value="#{beanHabitacion.habitaciones}" var="habitacion">
+
+					<div class="col-sm-6 col-md-4">
+						<div class="thumbnail">
+							<img src="#{habitacion.imagenUrl}" class="card-img-top"
+								alt="#{habitacion.tipo}"></img>
+							<div class="card-body">
+								<h5 class="card-title">Tipo de Habitacion : #{habitacion.tipo}</h5>
+								<p class="card-text">#{habitacion.descripcion}</p>
+								<p class="card-text">Precio: #{habitacion.precio}</p>
+								<a href="#" class="btn btn-primary"
+									onclick="seleccionarHabitacion(#{habitacion.habitacionId})">Reservar</a>
+							</div>
+						</div>
+					</div>
+
+				</ui:repeat>
+
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>
+

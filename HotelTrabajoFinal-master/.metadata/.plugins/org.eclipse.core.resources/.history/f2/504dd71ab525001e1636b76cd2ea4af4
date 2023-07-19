@@ -1,0 +1,35 @@
+package pe.edu.universidad.proc;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+
+import pe.edu.universidad.entidades.ServiciosAdicionale;
+import pe.edu.universidad.gestorreaservas.ServicioGestorReservas;
+
+@Named
+@SessionScoped
+public class beanCarrito implements Serializable {
+	@Inject
+    private ServicioGestorReservas servicioGestorReserva;
+	
+	private static final long serialVersionUID = 1L;
+	private List<ServiciosAdicionale> carrito;
+	
+	@PostConstruct
+	public void iniciarCarrito() {
+		setCarrito(servicioGestorReserva.listarServicios());
+	}
+	public List<ServiciosAdicionale> getCarrito() {
+		return carrito;
+	}
+	public void setCarrito(List<ServiciosAdicionale> carrito) {
+		this.carrito = carrito;
+	}
+	
+}
