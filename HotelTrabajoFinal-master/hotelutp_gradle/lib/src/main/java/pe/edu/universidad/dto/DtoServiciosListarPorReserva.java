@@ -1,7 +1,5 @@
 package pe.edu.universidad.dto;
 
-import java.sql.Date;
-
 import pe.edu.universidad.entidades.ReservasServiciosAdicionalePK;
 
 public class DtoServiciosListarPorReserva {

@@ -1,0 +1,10 @@
+package pe.edu.universidad.dto;
+
+import java.util.Date;
+
+public class DtoRegistrarSalida {
+	int id;
+	double montoFinal;
+	Date hoy;
+	
+}

@@ -5,19 +5,19 @@ import java.util.Date;
 public class ReservaDTO {
 	private int habitacionId;
 
-    private String nombreCliente;
+	private String nombreCliente;
 
-    private String correoElectronico;
+	private String correoElectronico;
 
-    private String telefono;
+	private String telefono;
 
-    private Date fechaInicio;
+	private Date fechaInicio;
 
-    private Date fechaFin;
+	private Date fechaFin;
 
-    private Integer numeroAdultos;
+	private Integer numeroAdultos;
 
-    private Integer numeroNinos;
+	private Integer numeroNinos;
 
 	public int getHabitacionId() {
 		return habitacionId;
@@ -82,5 +82,5 @@ public class ReservaDTO {
 	public void setNumeroNinos(Integer numeroNinos) {
 		this.numeroNinos = numeroNinos;
 	}
-    
+
 }

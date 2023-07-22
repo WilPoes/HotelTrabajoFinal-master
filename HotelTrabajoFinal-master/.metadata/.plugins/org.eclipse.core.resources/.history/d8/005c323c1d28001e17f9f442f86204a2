@@ -1,0 +1,105 @@
+package pe.edu.universidad.proc;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+import pe.edu.universidad.entidades.Habitacione;
+import pe.edu.universidad.entidades.Reserva;
+import pe.edu.universidad.gestorreaservas.ServicioGestorReservas;
+import pe.edu.universidad.dto.ReservaDTO;
+
+@Named
+@SessionScoped
+
+public class beanReserva implements Serializable {
+	@Inject
+	private ServicioGestorReservas servicioGestorReserva;
+
+	private static final long serialVersionUID = 1L;
+
+	int habitacionId;
+	private ReservaDTO reservaDTO = new ReservaDTO();
+	private List<Reserva> reservas;
+	private Habitacione habitacionSeleccionada;
+	// VARIABLE ACORDEON
+	private String activeIndexFD = "panel1";
+
+	public String getActiveIndexFD() {
+		return activeIndexFD;
+	}
+
+	public void setActiveIndexFD(String activeIndexFD) {
+		this.activeIndexFD = activeIndexFD;
+	}
+
+	@PostConstruct
+	public void iniciarListaReservas() {
+		setReservas(servicioGestorReserva.listarReservas());
+	}
+
+	public void seleccionarHabitacion(int id) throws IOException {
+		setHabitacionId(id);
+		iniciarHabitacionId();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		String url = externalContext.getRequestContextPath() + "/procesoReserva.xhtml?habitacionId=" + habitacionId;
+		externalContext.redirect(url);
+	}
+
+	public void iniciarHabitacionId() {
+		setHabitacionSeleccionada(servicioGestorReserva.buscarHabitacionPorId(habitacionId));
+	}
+
+	public void guardarReserva() {
+		Reserva reserva = new Reserva();
+		reserva.setHabitacione(servicioGestorReserva.buscarHabitacionPorId(habitacionId));
+		reserva.setNombreCliente(reservaDTO.getNombreCliente());
+		reserva.setCorreoElectronico(reservaDTO.getCorreoElectronico());
+		reserva.setTelefono(reservaDTO.getTelefono());
+		reserva.setFechaInicio(reservaDTO.getFechaInicio());
+		reserva.setFechaFin(reservaDTO.getFechaFin());
+		reserva.setNumeroAdultos(reservaDTO.getNumeroAdultos());
+		reserva.setNumeroNinos(reservaDTO.getNumeroNinos());
+		reserva.setEstado("Pendiente");
+		servicioGestorReserva.guardarReserva(reserva);
+		setReservas(servicioGestorReserva.listarReservas());
+		setActiveIndexFD("panel2");
+	}
+
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+	public long getHabitacionId() {
+		return habitacionId;
+	}
+
+	public void setHabitacionId(int habitacionId) {
+		this.habitacionId = habitacionId;
+	}
+
+	public Habitacione getHabitacionSeleccionada() {
+		return habitacionSeleccionada;
+	}
+
+	public void setHabitacionSeleccionada(Habitacione habitacionSeleccionada) {
+		this.habitacionSeleccionada = habitacionSeleccionada;
+	}
+
+	public ReservaDTO getReservaDTO() {
+		return reservaDTO;
+	}
+
+	public void setReservaDTO(ReservaDTO reservaDTO) {
+		this.reservaDTO = reservaDTO;
+	}
+}

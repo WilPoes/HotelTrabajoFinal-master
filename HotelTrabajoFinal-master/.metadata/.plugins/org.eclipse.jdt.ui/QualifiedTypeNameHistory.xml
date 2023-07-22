@@ -4,4 +4,11 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="pe.edu.universidad.dto.DtoHabitaciones"/>
     <fullyQualifiedTypeName name="pe.edu.universidad.entidades.Habitacione"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="pe.edu.universidad.entidades.Reserva"/>
+    <fullyQualifiedTypeName name="pe.edu.universidad.dto.DtoRegistrarSalida"/>
+    <fullyQualifiedTypeName name="pe.edu.universidad.entidades.RegistrosSalida"/>
+    <fullyQualifiedTypeName name="java.math.BigDecimal"/>
 </qualifiedTypeNameHistroy>

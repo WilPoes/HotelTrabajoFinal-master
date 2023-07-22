@@ -28,10 +28,10 @@ import pe.edu.universidad.gestorreaservas.ServicioGestorReservas;
 public class beanCarrito implements Serializable {
 	@PersistenceContext(unitName = "hotel_jpa")
 	private EntityManager em;
-
+	
 	@Inject
 	private ServicioGestorReservas servicioGestorReserva;
-
+	
 	@Inject
 	private ServicioGestorCarrito servicioGestorCarrito;
 
@@ -65,11 +65,10 @@ public class beanCarrito implements Serializable {
 		Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		System.out.println("idreserva desde->" + map.get("idReserva"));
 		int idReserva = Integer.parseInt(map.get("idReserva"));
-		// "idServicio"
+		// idServicio
 		int servicioAdicionalId = Integer.parseInt(map.get("idServicio"));
 		//
-		Reserva reserva = em.find(Reserva.class, idReserva);
-		ServiciosAdicionale servicioAdicional = em.find(ServiciosAdicionale.class, servicioAdicionalId);
+		Reserva reserva = em.find(Reserva.class, idReserva);		
 		//
 		ReservasServiciosAdicionale reservasServiciosAdicionale = new ReservasServiciosAdicionale();
 		ReservasServiciosAdicionalePK pk = new ReservasServiciosAdicionalePK();

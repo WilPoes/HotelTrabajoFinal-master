@@ -5,11 +5,12 @@ public class DtoServiciosListar {
 	private String nombre;
 	private double precio;
 	private String image;
+
 	//
 	public DtoServiciosListar() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public int getId() {
 		return id;
 	}

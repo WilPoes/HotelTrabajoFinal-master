@@ -1,0 +1,10 @@
+@charset "ISO-8859-1";
+
+@font-face {
+	font-family: 'MiFuente';
+	src: url('/ruta-a-la-fuente/mifuente.ttf') format('truetype');
+}
+
+.texto-personalizado {
+	font-family: 'MiFuente', Lato;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title><h:outputText value="#{msg.index_titulo}"></h:outputText></title>
+</h:head>
+
+<h:body style="font-family: 'Lato', sans-serif; font-size=4px">
+	<ui:include src="../Commun/Navbar.xhtml">
+	</ui:include>
+
+	<b:container fluid="true">
+		<b:row style="center" class="text-center">
+			<h2 class="sub-header">Reservas listas para agregar el servicio</h2>
+		</b:row>
+		<hr></hr>
+		<b:row class="text-center" style="text-align:center">
+			<b:column medium-screen="2" class="text-center">
+				<b:well
+					value="Aqui estan las reservas confirmadas lsitas para ser agregadas"></b:well>
+				<img src="../img/spf6.png"></img>
+			</b:column>
+
+			<b:column medium-screen="5" class="text-center">
+				<h:form>
+					<b:dataTable value="#{beanReserva.reservas}" var="reserva">
+						<b:dataTableColumn label="#ID->[HABIT]#" style="text-align:center"
+							value="#{reserva.reservaId} -> #{reserva.habitacione.habitacionId} " />
+						<b:dataTableColumn style="text-align:center"
+							value="#{reserva.nombreCliente}" />
+						<b:dataTableColumn style="text-align:center"
+							value="#{reserva.correoElectronico}" />
+						<b:dataTableColumn style="text-align:center"
+							value="#{reserva.telefono}" />
+						<b:dataTableColumn style="text-align:center"
+							value="#{reserva.fechaInicio}" />
+						<b:dataTableColumn style="text-align:center"
+							value="#{reserva.fechaFin}" />
+						<b:dataTableColumn style="text-align:center"
+							value="#{reserva.estado}" />
+						<h:column>
+							<!-- HEADER -->
+							<f:facet name="header">
+								<h:outputText value="Accion"></h:outputText>
+							</f:facet>
+							<!-- PARAMETROS -->
+							<h:commandButton value="AGREGAR SERVICIOS"
+								action="#{beanCarrito.listarServiciosPorReserva}">
+								<f:param name="idReserva" value="#{reserva.reservaId}">
+								</f:param>
+							</h:commandButton>
+						</h:column>
+					</b:dataTable>
+				</h:form>
+			</b:column>
+		</b:row>
+	</b:container>
+
+</h:body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title><h:outputText value="#{msg.index_titulo}"></h:outputText></title>
+</h:head>
+
+<h:body style="font-family: 'Lato', sans-serif;">
+	<ui:include src="../Commun/Navbar.xhtml">
+	</ui:include>
+
+	<b:container fluid="true">
+		<b:row style="center" class="text-center">
+			<h2 class="sub-header">Reserva listas para hacer Checkout</h2>
+		</b:row>
+		<hr></hr>
+
+		<p></p>
+
+		<b:row class="text-center">
+			<b:column medium-screen="3">
+				<b:well
+					value="Aqui estamos listos para mostrar el precio de los servicios que se pidieron para la RESERVA
+			[#{beanCheckOut.idReserva}]"></b:well>
+				<img src="../img/spf6.png"></img>
+			</b:column>
+
+
+			<b:column medium-screen="4">
+				<h:form>
+					<b:dataTable value="#{beanCheckOut.servicioPorReserva}" var="serv">
+						<b:dataTableColumn value="#{serv.id_servicio}" />
+						<b:dataTableColumn value="#{serv.precio}" />
+						<b:dataTableColumn value="#{serv.nombre}" />
+						<b:dataTableColumn value="#{serv.precio}" />
+					</b:dataTable>
+				</h:form>
+			</b:column>
+
+			<b:column medium-screen="3">
+				<p>Aqui se muestra el total y la descripcion de la reserva</p>
+				<b:well value="montoTotalServicios S/. #{beanCheckOut.montoTotal}"></b:well>
+				<b:well value="montomReservaHabitacion S/. #{beanCheckOut.montoTotal}"></b:well>
+				<b:well value="montoTotal S/. #{beanCheckOut.montoTotal}"></b:well>
+			</b:column>
+
+			<b:column medium-screen="1">
+				<h:panelGrid columns="2">
+					<h:form>
+						<h:commandButton value="CheckOut" look="danger"
+							action="#{beanCheckOut.modificarRegistro}">
+							<f:param name="idReserva" value="#{beanCheckOut.idReserva}">
+							</f:param>
+						</h:commandButton>
+						<b:commandButton value="Realizar Salida" look="danger"
+							onclick="return confirmarSalida();" />
+
+						<h:commandButton value="Realizar Salida JS" look="danger"
+							onclick="return confirmarSalida();"
+							action="#{beanCheckOut.modificarRegistro}">
+							<f:param name="idReserva" value="#{beanCheckOut.idReserva}">
+							</f:param>
+						</h:commandButton>
+
+					</h:form>
+				</h:panelGrid>
+			</b:column>
+		</b:row>
+	</b:container>
+</h:body>
+
+
+<script>
+	function confirmarSalida() {
+		var respuesta = confirm("¿Estás seguro de realizar la salida del cliente?");
+		return respuesta;
+	}
+</script>
+
+</html>

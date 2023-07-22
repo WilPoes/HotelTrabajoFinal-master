@@ -16,6 +16,7 @@ import java.util.Date;
 public class RegistrosSalida implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name="registro_salida_id")
 	private Integer registroSalidaId;

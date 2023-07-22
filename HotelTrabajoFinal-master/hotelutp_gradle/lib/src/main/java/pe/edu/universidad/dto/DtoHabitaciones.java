@@ -2,7 +2,6 @@ package pe.edu.universidad.dto;
 
 public class DtoHabitaciones {
 	private Integer habitacionId;
-
 	private String descripcion;
 
 	public DtoHabitaciones() {

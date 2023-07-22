@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title><h:outputText value="#{msg.index_titulo}"></h:outputText></title>
+	<link rel="stylesheet" type="text/css" href="../css/STYLES.css" />
+</h:head>
+
+<h:body>
+	<ui:include src="/Commun/Navbar.xhtml">
+	</ui:include>
+	<b:container fluid="true">
+		<b:row style="center" class="text-center">
+			<h2 class="sub-header">Pedidos por Reserva del Cliente</h2>
+		</b:row>
+		
+		<hr></hr>
+		
+		<b:row class="text-center">
+			<b:column medium-screen="2">
+				<b:well
+					value="Aqui mostramos los servicios que se pidieron en reserva"></b:well>
+				<img src="../img/spf6.png"></img>
+			</b:column>
+
+			<b:column medium-screen="3">
+				<b:dataTable value="#{beanCarrito.servicioPorReserva}"
+					searching="false" var="serv">
+
+					<b:dataTableColumn value="#{serv.id_servicio}" />
+					<b:dataTableColumn value="#{serv.precio}" />
+					<b:dataTableColumn value="#{serv.nombre}" />
+				</b:dataTable>
+			</b:column>
+
+			<b:column medium-screen="2">
+				<b:well value="Lista de nuestros servicios listos para agregar"></b:well>
+				<img src="../img/spf6.png"></img>
+			</b:column>
+
+
+			<b:column medium-screen="3">
+				<h:form>
+					<b:dataTable value="#{beanCarrito.carrito}" page-length="5"
+						page-length-menu="5,10,20" var="carrito"
+						style="display:block; text-align:center">
+
+						<b:dataTableColumn value="#{carrito.nombre}"
+							style="text-align: center;" />
+
+						<b:dataTableColumn value="#{carrito.precio}"
+							style="text-align: center;" />
+
+						<b:dataTableColumn style="text-align: center;">
+							<h:commandButton value="Añadir"
+								action="#{beanCarrito.guardarServicio}">
+								<f:param name="idReserva" value="#{beanCarrito.idReserva}" />
+								<f:param name="idServicio"
+									value="#{carrito.servicioAdicionalId}" />
+							</h:commandButton>
+						</b:dataTableColumn>
+					</b:dataTable>
+				</h:form>
+
+			</b:column>
+		</b:row>
+	</b:container>
+</h:body>
+</html>

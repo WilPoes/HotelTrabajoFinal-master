@@ -9,62 +9,67 @@
 
 <h:head>
 	<title><h:outputText value="#{msg.index_titulo}"></h:outputText></title>
+	<!-- <h:outputStylesheet name="../styles.css" /> -->
 </h:head>
 
-<h:body>
+<h:body style="font-family: 'Lato', sans-serif;">
 	<ui:include src="/Commun/Navbar.xhtml">
 	</ui:include>
 	<b:container fluid="true">
-		<b:row style="center">
+		<b:row style="center" class="text-center">
 			<h2 class="sub-header">Pedidos por Reserva del Cliente</h2>
 		</b:row>
-		<hr></hr>
-		<b:row>
-			<b:column medium-screen="2">
 
+		<hr></hr>
+
+		<b:row class="text-center" style="text-align:center">
+			<b:column medium-screen="2">
 				<b:well
 					value="Aqui mostramos los servicios que se pidieron en reserva"></b:well>
+				<img src="../img/spf6.png"></img>
 			</b:column>
+
 			<b:column medium-screen="4">
-				<h:form>
-					<b:dataTable value="#{beanCarrito.servicioPorReserva}" var="serv">
-						<b:dataTableColumn value="#{serv.id_servicio}" />
-						<b:dataTableColumn value="#{serv.precio}" />
-						<b:dataTableColumn value="#{serv.nombre}" />
-						<b:dataTableColumn value="#{serv.precio}" />
-					</b:dataTable>
-				</h:form>
+				<b:dataTable value="#{beanCarrito.servicioPorReserva}"
+					searching="false" var="serv" style="text-align:center">
+					<b:dataTableColumn label="##ID##" value="#{serv.id_servicio}"
+						style="text-align:center" />
+					<b:dataTableColumn label="##S/.PRECIO##" value="#{serv.precio}"
+						style="text-align:center" />
+					<b:dataTableColumn label="##PRECIO##" value="#{serv.nombre}"
+						style="text-align:center" />
+				</b:dataTable>
 			</b:column>
+
+			<b:column medium-screen="2">
+				<b:well value="Lista de nuestros servicios listos para agregar"></b:well>
+				<img src="../img/spf2.jpg" style="width: 160px; height: 180px;"></img>
+			</b:column>
+
 
 			<b:column medium-screen="4">
 				<h:form>
 					<b:dataTable value="#{beanCarrito.carrito}" page-length="5"
 						page-length-menu="5,10,20" var="carrito"
 						style="display:block; text-align:center">
-						<b:dataTableColumn value="#{carrito.servicioAdicionalId}"
-							style=" text-align: center;" />
-						<b:dataTableColumn value="#{carrito.nombre}"
-							style=" text-align: center;" />
-						<b:dataTableColumn value="#{carrito.precio}"
+
+						<b:dataTableColumn label="##SERVICIO##" value="#{carrito.nombre}"
 							style="text-align: center;" />
-						<h:column>
-							<!-- HEADER -->
-							<f:facet name="header">
-								<h:outputText value="Accion"></h:outputText>
-							</f:facet>
-							<!-- PARAMETROS -->
+
+						<b:dataTableColumn label="##S/.PRECIOS##"
+							value="#{carrito.precio}" style="text-align: center;" />
+
+						<b:dataTableColumn label="##ACCIONES##">
 							<h:commandButton value="Añadir"
 								action="#{beanCarrito.guardarServicio}">
-								<f:param name="idReserva" value="#{beanCarrito.idReserva}">
-								</f:param>
+								<f:param name="idReserva" value="#{beanCarrito.idReserva}" />
 								<f:param name="idServicio"
-									value="#{carrito.servicioAdicionalId}">
-								</f:param>
+									value="#{carrito.servicioAdicionalId}" />
 							</h:commandButton>
-						</h:column>
-						<!--  -->
+						</b:dataTableColumn>
 					</b:dataTable>
 				</h:form>
+
 			</b:column>
 		</b:row>
 	</b:container>

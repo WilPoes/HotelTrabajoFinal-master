@@ -2,37 +2,29 @@ package pe.edu.universidad.proc;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import pe.edu.universidad.dto.DtoReserva;
-import pe.edu.universidad.dto.Dtonuevareserva;
-import pe.edu.universidad.dto.ReservaDTO;
 import pe.edu.universidad.entidades.Habitacione;
 import pe.edu.universidad.entidades.Reserva;
 import pe.edu.universidad.gestorreaservas.ServicioGestorReservas;
+import pe.edu.universidad.dto.ReservaDTO;
+
 @Named
 @SessionScoped
-
 public class beanReserva implements Serializable {
 	@Inject
 	private ServicioGestorReservas servicioGestorReserva;
-
+	//
 	private static final long serialVersionUID = 1L;
-
+	//
 	int habitacionId;
-
 	private ReservaDTO reservaDTO = new ReservaDTO();
-
 	private List<Reserva> reservas;
-	private Reserva reserva;
 	private Habitacione habitacionSeleccionada;
 	// VARIABLE ACORDEON
 	private String activeIndexFD = "panel1";
@@ -109,5 +101,6 @@ public class beanReserva implements Serializable {
 	public void setReservaDTO(ReservaDTO reservaDTO) {
 		this.reservaDTO = reservaDTO;
 	}
-
+	
+	
 }

@@ -10,54 +10,57 @@
 	<title><h:outputText value="#{msg.index_titulo}"></h:outputText></title>
 </h:head>
 
-<h:body>
+<h:body style="font-family: 'Lato', sans-serif;">
 	<ui:include src="../Commun/Navbar.xhtml">
 	</ui:include>
-	<div class="container">
-		<div class="row">
-			<div class="">
-				<b:row class="text-center">
-					<h2 class="sub-header">Habitaciones listas para su reserva</h2>
-				</b:row>
-				<div class="table-responsive">
-					<h:form>
-						<b:dataTable value="#{beanReserva.reservas}" page-length="4"
-							page-length-menu="4,8,16" style="width:100%;" var="reserva">
-							<b:dataTableColumn value="#{reserva.reservaId}" />
-							<b:dataTableColumn value="#{reserva.habitacione.habitacionId}" />
-							<b:dataTableColumn value="#{reserva.nombreCliente}" />
-							<b:dataTableColumn value="#{reserva.correoElectronico}" />
-							<b:dataTableColumn value="#{reserva.telefono}" />
-							<b:dataTableColumn value="#{reserva.fechaInicio}" />
-							<b:dataTableColumn value="#{reserva.fechaFin}" />
-							<b:dataTableColumn value="#{reserva.estado}" />
+	<b:container fluid="true">
+		<b:row style="center" class="text-center">
+			<h2 class="sub-header">Reserva listas para hacer Checkout</h2>
+		</b:row>
+		<hr></hr>
 
-							<h:column>
-								<!-- HEADER -->
-								<f:facet name="header">
-									<h:outputText value="Procesos para Check"></h:outputText>
-								</f:facet>
+		<b:row class="text-center">
+			<b:column medium-screen="2">
+				<b:well
+					value="Aqui realizaremos el cambio del estado de habitaciones"></b:well>
+				<img src="../img/spf6.png"></img>
+			</b:column>
+	
+			<b:column medium-screen="8">
+				<h:form>
+					<b:dataTable value="#{beanReserva.reservas}" page-length="4"
+						page-length-menu="4,8,16" style="width:120%;" var="reserva">
+						<b:dataTableColumn
+							value="#{reserva.reservaId}->#{reserva.habitacione.habitacionId}" />
+						<b:dataTableColumn value="#{reserva.nombreCliente}" />
+						<b:dataTableColumn value="#{reserva.correoElectronico}" />
+						<b:dataTableColumn value="#{reserva.telefono}" />
+						<b:dataTableColumn value="#{reserva.fechaInicio}" />
+						<b:dataTableColumn value="#{reserva.fechaFin}" />
+						<b:dataTableColumn value="#{reserva.estado}" />
 
-								<!-- PARAMETROS -->
-								<f:param value="botones">
-									<b:buttonGroup size="xs">
-										<h:commandButton value="CheckOut" look="danger"
-											action="#{beanCheckOut.listarServiciosPorReserva}">
-											<f:param name="idReserva" value="#{reserva.reservaId}">
-											</f:param>
-										</h:commandButton>
-									</b:buttonGroup>
-								</f:param>
-							</h:column>
-						</b:dataTable>
-					</h:form>
+						<h:column>
+							<!-- HEADER -->
+							<f:facet name="header">
+								<h:outputText value="Accion"></h:outputText>
+							</f:facet>
 
+							<!-- PARAMETROS -->
+							<f:param value="botones">
+								<b:buttonGroup size="xs">
+									<h:commandButton value="CheckOut" look="danger"
+										action="#{beanCheckOut.listarServiciosPorReserva}">
+										<f:param name="idReserva" value="#{reserva.reservaId}">
+										</f:param>
+									</h:commandButton>
+								</b:buttonGroup>
+							</f:param>
+						</h:column>
+					</b:dataTable>
+				</h:form>
+			</b:column>
+		</b:row>
 
-				</div>
-			</div>
-
-		</div>
-	</div>
-
+	</b:container>
 </h:body>
 </html>
